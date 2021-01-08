@@ -31,7 +31,6 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,12 +140,14 @@ class __LoginWidgetState extends State<_LoginWidget> {
                     Utils.showToast('请输入账号或者密码');
                     return;
                   }
-                  value.login(
+                  value
+                      .login(
                     context,
                     phone,
                     pwd,
-                  ).then((value){
-                    if(value != null){
+                  )
+                      .then((value) {
+                    if (value != null) {
                       Provider.of<PlayListModel>(context).user = value;
                       NavigatorUtil.goHomePage(context);
                     }

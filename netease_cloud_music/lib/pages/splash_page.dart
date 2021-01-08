@@ -29,7 +29,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     _logoController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500))
           ..drive(_scaleTween);
+    // _logoController.drive(_scaleTween);
     Future.delayed(Duration(milliseconds: 500), () {
+      // 从0->1
       _logoController.forward();
     });
     _logoAnimation =
@@ -44,21 +46,23 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
   }
 
-  void goPage() async{
+  void goPage() async {
     await Application.initSp();
     UserModel userModel = Provider.of<UserModel>(context);
     userModel.initUser();
     PlaySongsModel playSongsModel = Provider.of<PlaySongsModel>(context);
     // 判断是否有保存的歌曲列表
-    if(Application.sp.containsKey('playing_songs')){
+    if (Application.sp.containsKey('playing_songs')) {
       List<String> songs = Application.sp.getStringList('playing_songs');
-      playSongsModel.addSongs(songs.map((s) => Song.fromJson(FluroConvertUtils.string2map(s))).toList());
+      playSongsModel.addSongs(songs
+          .map((s) => Song.fromJson(FluroConvertUtils.string2map(s)))
+          .toList());
       int index = Application.sp.getInt('playing_index');
       playSongsModel.curIndex = index;
     }
     if (userModel.user != null) {
-      await NetUtils.refreshLogin(context).then((value){
-        if(value.data != -1){
+      await NetUtils.refreshLogin(context).then((value) {
+        if (value.data != -1) {
           NavigatorUtil.goHomePage(context);
         }
       });
@@ -83,6 +87,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         width: double.infinity,
         child: ScaleTransition(
           scale: _logoAnimation,
+          // Hero是页与页之间的过渡动画
           child: Hero(
             tag: 'logo',
             child: Image.asset('images/icon_logo.png'),

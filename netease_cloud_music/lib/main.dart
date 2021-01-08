@@ -13,7 +13,7 @@ import 'application.dart';
 import 'utils/log_util.dart';
 
 void main() {
-  Router router = Router();
+  FluroRouter router = FluroRouter();
   Routes.configureRoutes(router);
   Application.router = router;
   Application.setupLocator();
@@ -40,15 +40,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // 设置是否显示debug的ui
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      // 定义一个globalKey用于全局记录widget的状态
       navigatorKey: Application.getIt<NavigateService>().key,
+      // 定义主题
       theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.white,
           splashColor: Colors.transparent,
           tooltipTheme: TooltipThemeData(verticalOffset: -100000)),
       home: SplashPage(),
+      // 根据RouteSettings信息创建fluro框架路由
       onGenerateRoute: Application.router.generator,
     );
   }

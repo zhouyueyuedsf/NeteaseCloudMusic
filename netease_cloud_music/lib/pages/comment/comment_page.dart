@@ -184,8 +184,7 @@ class _CommentPageState extends State<CommentPage> {
               ),
               VEmptyView(5),
               Text(
-                DateUtil.getDateStrByMs(data.time,
-                    format: DateFormat.YEAR_MONTH_DAY),
+                "",
                 style: smallGrayTextStyle,
               ),
               VEmptyView(20),

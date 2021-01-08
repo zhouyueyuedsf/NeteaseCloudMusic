@@ -16,7 +16,8 @@ class Routes {
   static String lookImg = "/look_img";
   static String userDetail = "/user_detail";
 
-  static void configureRoutes(Router router) {
+  // 利用fluro框架路由
+  static void configureRoutes(FluroRouter router) {
     router.notFoundHandler = new Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       print("ROUTE WAS NOT FOUND !!!");
