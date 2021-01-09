@@ -77,7 +77,9 @@ class NavigatorUtil {
 //    _navigateTo(context, '${Routes.lookImg}');
     Navigator.push(
       context,
-        TransparentRoute(builder: (_) => LookImgPage(imgs, index),),
+      TransparentRoute(
+        builder: (_) => LookImgPage(imgs, index),
+      ),
     );
   }
 
@@ -85,5 +87,4 @@ class NavigatorUtil {
   static void goUserDetailPage(BuildContext context, int userId) {
     _navigateTo(context, "${Routes.userDetail}?id=$userId");
   }
-
 }

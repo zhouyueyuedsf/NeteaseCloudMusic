@@ -11,6 +11,7 @@ import 'package:netease_cloud_music/utils/utils.dart';
 class UserModel with ChangeNotifier {
   User _user;
 
+  // 类似kotlin的幕后变量的用法
   User get user => _user;
 
   /// 初始化 User
@@ -30,6 +31,7 @@ class UserModel with ChangeNotifier {
       return null;
     }
     Utils.showToast(user.msg ?? '登录成功');
+    // 登录操作的时候，保存用户信息到sp
     _saveUserInfo(user);
     return user;
   }
